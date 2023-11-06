@@ -1,7 +1,7 @@
 from elasticsearch import Elasticsearch
 import ndjson
 
-ELASTIC_PASSWORD = "your_password"
+ELASTIC_PASSWORD = "boss4237"
 
 es = Elasticsearch("https://localhost:9200", http_auth=("elastic", ELASTIC_PASSWORD), verify_certs=False)
 
@@ -14,7 +14,7 @@ try:
     print(f"Index {index_name} has been created")
 
     # Define the path to the NDJSON file
-    ndjson_file_path = r"C:\Users\Thitiwut\Desktop\Uni class\Year 3 Semester 1\ITCS414 Information Storage and Retrieval\Project 2\Anime Docs\anime_data.json"
+    ndjson_file_path = r"C:\Users\Thitiwut\Documents\GitHub\AnimeSearchEngine_Via_ElasticSearch\Web app\elastic_code\anime_data4.json"
 
     # Read the NDJSON file and automatically detect the mapping
     documents = []

@@ -5,7 +5,7 @@ from elasticsearch import Elasticsearch
 import math
 
 """Change your elastic password here"""
-ELASTIC_PASSWORD = "your_password"
+ELASTIC_PASSWORD = "boss4237"
 
 es = Elasticsearch("https://localhost:9200", http_auth=("elastic", ELASTIC_PASSWORD), verify_certs=False)
 app = Flask(__name__)
@@ -35,6 +35,14 @@ def search():
     }
 
     res = es.search(index='anime', body=body)
-    hits = [{'title': doc['_source']['title'], 'plot_summary': doc['_source']['plot_summary']} for doc in res['hits']['hits']]
+    hits = [
+        {
+            'title': doc['_source']['title'],
+            'plot_summary': doc['_source']['plot_summary'],
+            'image_url': doc['_source']['image_url'],
+            'genres': doc['_source']['genres'],
+        }
+        for doc in res['hits']['hits']
+    ]
     page_total = math.ceil(res['hits']['total']['value']/page_size)
     return render_template('search.html',keyword=keyword, hits=hits, page_no=page_no, page_total=page_total)

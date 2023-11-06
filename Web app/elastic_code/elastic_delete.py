@@ -1,6 +1,6 @@
 from elasticsearch import Elasticsearch
 
-ELASTIC_PASSWORD = "your_password"
+ELASTIC_PASSWORD = "boss4237"
 
 es = Elasticsearch("https://localhost:9200", http_auth=("elastic", ELASTIC_PASSWORD), verify_certs=False)
 

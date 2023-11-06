@@ -19,13 +19,67 @@
         .pagination-container {
             margin-top: 20px;
         }
+
+        .image-text-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .image-container {
+            flex: 1;
+            max-width: 100px; /* Adjust the max-width to make all images the same size */
+        }
+
+        .text-container {
+            margin-left: 130px;
+        }
+
+        /* Style the search box */
+        .search-box {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 <div class="container result-container">
+    <!-- Enhanced Search Box -->
+    <form class="search-box" action="/search" method="GET">
+        <input class="search-input" type="text" name="keyword" placeholder="Search" aria-label="Search">
+        <button class="search-button" type="submit">Search</button>
+    </form>
+
     {% for doc in hits %}
-        {{ doc['title'] }}<br>
-        {{ doc['plot_summary'] }}<br>
+        <div class="image-text-container">
+            <div class="image-container">
+                <img src="{{ doc['image_url'] }}" alt="{{ doc['title'] }} Image" style="max-width: 200px;">
+            </div>
+            <div class="text-container">
+                <h3>{{ doc['title'] }}</h3>
+                <p>{{ doc['plot_summary'] }}</p>
+                <p><strong>Genres:</strong> {{ doc['genres'] | join(', ') }}</p>
+            </div>
+        </div>
         <hr>
     {% endfor %}
 </div>
