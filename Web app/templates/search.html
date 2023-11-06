@@ -59,6 +59,11 @@
             font-size: 16px;
             cursor: pointer;
         }
+
+        .more-info-button {
+            flex: 1;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -78,6 +83,9 @@
                 <h3>{{ doc['title'] }}</h3>
                 <p>{{ doc['plot_summary'] }}</p>
                 <p><strong>Genres:</strong> {{ doc['genres'] | join(', ') }}</p>
+                <div class="more-info-button">
+                    <a class="btn btn-primary" href="https://www.animenewsnetwork.com/encyclopedia/anime.php?id={{ doc['animeID'] }}" target="_blank">More Info</a>
+                </div>
             </div>
         </div>
         <hr>

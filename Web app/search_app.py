@@ -24,19 +24,56 @@ def search():
         page_no = 1
 
     body = {
-        'size': page_size,
-        'from': page_size * (page_no-1),
-        'query': {
-            'multi_match': {
-                'query': keyword,
-                'fields': ['title', 'plot_summary', 'genres', 'themes']
-            }
+    'size': page_size,
+    'from': page_size * (page_no - 1),
+    'query': {
+        'bool': {
+            'should': [
+                {
+                    'match': {
+                        'title': {
+                            'query': keyword,
+                            'boost': 3,
+                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
+                        }
+                    }
+                },
+                {
+                    'match': {
+                        'plot_summary': {
+                            'query': keyword,
+                            'boost': 2,
+                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
+                        }
+                    }
+                },
+                {
+                    'match': {
+                        'genres': {
+                            'query': keyword,
+                            'boost': 1,
+                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
+                        }
+                    }
+                },
+                {
+                    'match': {
+                        'themes': {
+                            'query': keyword,
+                            'boost': 1,
+                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
+                        }
+                    }
+                }
+            ]
         }
     }
+}
 
     res = es.search(index='anime', body=body)
     hits = [
         {
+            'animeID': doc['_source']['animeID'],
             'title': doc['_source']['title'],
             'plot_summary': doc['_source']['plot_summary'],
             'image_url': doc['_source']['image_url'],
