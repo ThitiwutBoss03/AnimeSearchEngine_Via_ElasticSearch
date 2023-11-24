@@ -27,45 +27,10 @@ def search():
     'size': page_size,
     'from': page_size * (page_no - 1),
     'query': {
-        'bool': {
-            'should': [
-                {
-                    'match': {
-                        'title': {
-                            'query': keyword,
-                            'boost': 3,
-                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
-                        }
-                    }
-                },
-                {
-                    'match': {
-                        'plot_summary': {
-                            'query': keyword,
-                            'boost': 2,
-                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
-                        }
-                    }
-                },
-                {
-                    'match': {
-                        'genres': {
-                            'query': keyword,
-                            'boost': 1,
-                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
-                        }
-                    }
-                },
-                {
-                    'match': {
-                        'themes': {
-                            'query': keyword,
-                            'boost': 1,
-                            'fuzziness': 'AUTO'  # Enable fuzziness for approximate matching
-                        }
-                    }
-                }
-            ]
+    'multi_match': {
+        'query': keyword,
+        'fields': ['title^3', 'plot_summary^2', 'genres^1', 'themes^1'],
+        'fuzziness': 'AUTO'
         }
     }
 }

@@ -12,11 +12,12 @@ keyword = "detective conan"
 body = {
         'size': page_size,
         'query': {
-            'multi_match': {
-                'query': keyword,
-                'fields': ['title', 'plot_summary', 'genres', 'themes']
-            }
+        'multi_match': {
+            'query': keyword,
+            'fields': ['title^3', 'plot_summary^2', 'genres^1', 'themes^1'],
+            'fuzziness': 'AUTO'
         }
+    }
     }
 
 # Perform the search

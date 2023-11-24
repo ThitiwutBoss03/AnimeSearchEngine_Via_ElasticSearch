@@ -14,7 +14,7 @@ try:
     print(f"Index {index_name} has been created")
 
     # Define the path to the NDJSON file
-    ndjson_file_path = r"C:\Users\Thitiwut\Documents\GitHub\AnimeSearchEngine_Via_ElasticSearch\Web app\elastic_code\anime_data4.json"
+    ndjson_file_path = r"C:\Users\Thitiwut\Documents\GitHub\AnimeSearchEngine_Via_ElasticSearch\Web app\elastic_code\anime_data5.json"
 
     # Read the NDJSON file and automatically detect the mapping
     documents = []
